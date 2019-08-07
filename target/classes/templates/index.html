@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>RUBIN | 垃圾分类搜索引擎</title>
+
+
+    <!-- Prevent the demo from appearing in search engines -->
+    <meta name="robots" content="noindex">
+
+    <!-- App CSS -->
+    <link type="text/css" href="/css/app.css" rel="stylesheet">
+    <link type="text/css" href="/css/app.rtl.css" rel="stylesheet">
+
+    <!-- Simplebar -->
+    <link type="text/css" href="/vendor/simplebar.css" rel="stylesheet">
+
+
+    <link type="text/css" href="/css/mystyle2.css" rel="stylesheet">
+
+    <!-- <link type="text/css" href="/css/mystyle.css" rel="stylesheet"> -->
+
+    <link href="/city-picker/css/city-picker.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+
+<body style="background-color: darkslategrey">
+    <div id="loading" style="background-color:rgba(255, 255, 255, 0.95);width:100%;height:100%;">
+        <div class="loading-dots-fast"></div>
+    </div>
+
+    <div class="fixed-top">
+
+        <nav class="navbar navbar-expand-md navbar-dark" style="background-color: rgba(0, 0, 0, 0.3) !important">
+            <div class="media align-items-center">
+                <img src="/images/logo2.png" style="height: 45px">
+            </div>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav ml-auto align-items-center">
+                    <li class="nav-item nav-link">
+                        <a class="btn btn-white" href="#top">
+                            <i class="material-icons align-middle md-18">expand_less </i>
+                            回到顶部
+                        </a>
+                    </li>
+                    <li class="nav-item align-self-center">
+                        <a href="#tips" class="nav-link">
+                            科普
+                        </a>
+                    </li>
+                    <!-- <li class="nav-item align-self-center">
+                        <a href="#" class="nav-link" data-toggle="dropdown" aria-expanded="false">
+                            搜索历史
+                        </a>
+                    </li> -->
+                    <li class="nav-item align-self-center">
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#addModal" title="添加">
+                            添加词条
+                        </a>
+                    </li>
+                    <li class="nav-item align-self-center">
+                        <a href="#contact" class="nav-link">
+                            联系我们
+                        </a>
+                    </li>
+                    <li class="nav-item nav-divider">
+                    <li class="nav-item dropdown nav-dropdown d-flex align-items-center">
+                        <a href="#" class="nav-link dropdown-toggle dropdown-clear-caret" data-toggle="dropdown"
+                            aria-expanded="false">
+                            登录
+                            <img src="../../../pbs.twimg.com/profile_images/928893978266697728/3enwe0fO_400x400.jpg"
+                                class="img-fluid rounded-circle ml-1" width="35" alt="">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-account">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <!-- <a href="account" class="dropdown-item ">
+                                        <i class="material-icons md-18 align-middle mr-1">account_circle</i>
+                                        <span class="align-middle">登录</span>
+                                    </a> -->
+                                </li>
+                                <li>
+                                    <!-- <a href="profile" class="dropdown-item ">
+                                        <i class="material-icons md-18 align-middle mr-1">lock</i>
+                                        <span class="align-middle">注册</span>
+                                    </a> -->
+                                </li>
+                                <li></li>
+
+                                <li></li>
+
+                                <li class="dropdown-divider"></li>
+                                <li>
+                                    <a href="login" class="dropdown-item">
+                                        <i class="material-icons md-18 align-middle mr-1">settings_applications</i>
+                                        <span class="align-middle">管理员后台</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- main content -->
+    <div class="top-navbar" style="height: 100%" id="top">
+
+        <div class="jumbotron fixed-banner" style="height: 100%;overflow: unset;">
+            <div class="fixed-banner-image-wrapper">
+                <img src="/images/bgimg.jpg" id="bgimg" style="height: 100%;width:100%">
+            </div>
+            <div class="container" style="top: 10%">
+                <div class="text-center">
+                    <div class="pb-3">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-4" style="margin-right: -15px;margin-left: -5px;align-content:center">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-9">
+
+                                    <img src="/images/logo2.png" style="height: 120px"></div>
+
+                            </div>
+                            <div class="col-md-3" style="margin-left: -15px;padding-top: 3%">
+                                <div class="col-md-11">
+
+                                    <h1 class="display-5">垃圾分类搜索引擎</h1>
+                                </div>
+                                <div class="col-md-1"></div>
+
+                            </div>
+                            <div class="col-md-2"></div>
+
+                        </div>
+                        <p class="lead">With RUBIN you can quickly find the category of the waste!</p>
+                    </div>
+                    <form action="/rub/index" method="post" enctype="multipart/form-data">
+                        <div class="input-group input-group--inline w-100 form-group3">
+                            <div class="input-group-addon">
+                                <i class="material-icons align-middle">search</i>
+                            </div>
+                            <input type="text" class="form-control" name="rubname" placeholder="可乐瓶" id="search">
+                        </div>
+                        <a href="#" onclick="showopt()">
+                            <div style="text-align: right;color:whitesmoke">高级 <div class="drawer-brand-circle mr-2"
+                                    style="line-height:15px;width: 15px;height: 15px;background: #7bb859;"><i
+                                        class="material-icons md-10">keyboard_arrow_down</i></div>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" id="myoption"
+                            style="left:20px;width: 95.5%;background-color: #fffdfd47;padding-top: 20px;">
+                            <div class="container" style="color:white">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="form-group3">
+                                            <label for="txt_wastelocate">地区</label>
+                                            <input name="rubloc" class="form-control" readonly type="text"
+                                                value="上海市/上海市" data-toggle="city-picker">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="form-group3">
+                                            <label for="txt_file">是否使用图片进行检索：</label>
+                                            <input type="checkbox" id="cb" onclick="usepics()">
+
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="spic" id="customFile" disabled>
+                                                <label class="custom-file-label" for="customFile">上传图片</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-10"></div>
+
+                                    <div class="col-md-4 col-lg-2"><button type="submit" class="btn btn-success"><i
+                                                class="material-icons align-middle md-15">search</i> SEARCH</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- 结果 -->
+        <div  th:if="${not #strings.isEmpty(isResult)}" style="color:rgb(31, 30, 30);height:111%;padding-top: 20px;" id="result">
+            <div class="container container--wide" style="height:100%">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h1 display-3 style="color: whitesmoke"><i
+                                class="material-icons md-30">loyalty</i>&nbsp;&nbsp;检索结果</h1>
+                        <hr>
+                    </div>
+
+                </div>
+                <!-- 有该词条 -->
+                <div th:if="${rubbish}!=null" class="card  card-property col-md-12 col-lg-12" style="border-radius: 20px 20px 20px 20px;padding-top:10px;padding-bottom:10px;background-color: #ffffff;
+                    height: 80%;">
+                    <div class="row"
+                        style="color:rgb(31, 31, 31);padding-bottom: 20px;padding-top: 30px;padding-left:40px;">
+                        <h1 class="display-5" th:text="${rubbish.rubname}"> </h1>
+
+                    </div>
+                    <div class="row" style="padding-bottom: 20px;padding-left:20px;">
+                        <div class="col-md-6 col-lg-8"
+                            style="padding-top: 20px;margin-top:-20px;border-top: 1px solid rgb(179, 179, 179)">
+                            <img  th:if="${rubbish.rubimg}==''" src="/images/default.png" style="width: 70%;height:100%">
+                            <img  th:unless="${rubbish.rubimg}==''" th:src="'http://localhost:8080/upload/'+${rubbish.rubimg}" style="width: auto;height:300px">
+
+                        </div>
+                        <div class="col-md-6 col-lg-4"
+                            style="padding-top: 20px;border-bottom: 1px solid darkslategrey">
+
+                            <ul class="list-unstyled m-0">
+                                <li class="d-flex mb-1">
+                                    <i class="material-icons md-40 align-middle"
+                                        style="color:darkslategrey;">location_on
+                                    </i>
+                                    <h3 style="color:darkslategrey;font-weight: bold"> 地点</h3><br>
+                                </li>
+                                <li class="d-flex mb-3">
+                                    <h5  th:text="${rubbish.rubloc}">上海市/上海市</h5>
+                                </li>
+                                <li class="d-flex mb-1">
+                                    <i class="material-icons md-40 align-middle"
+                                        style="color:darkslategrey;">youtube_searched_for</i>
+                                    <h3 style="color:darkslategrey;font-weight: bold" > 分类</h3><br>
+                                </li>
+                                <li class="d-flex mb-3">
+                                    <h5 th:text="${rubbish.rubcate}">可回收垃圾</h5>
+                                </li>
+                                <li class="d-flex mb-1">
+                                    <i class="material-icons md-40 align-middle"
+                                        style="color:darkslategrey;">message
+                                    </i>
+                                    <h3 style="color:darkslategrey;font-weight: bold"> 备注</h3><br>
+                                </li>
+                                <li class="d-flex mb-3" th:text="${rubbish.rubdetail}"><span></span>
+                                </li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                    <div align="right">
+
+                        <h6>检索结果有错误 或 对检索结果不满意？点击<a href="#" data-toggle="modal" title="修改" data-target="#editModal"  th:onclick="disedit([[${rubbish.rubid}]],[[${rubbish.rubname}]],[[${rubbish.rubloc}]]);">修改词条</a>
+                        </h6>
+                    </div>
+                </div>
+                <!-- 没有该词条 -->
+                <div th:unless="${rubbish}!=null" class="card  card-property col-md-12 col-lg-12" style="border-radius: 20px 20px 20px 20px;padding-top:15%;background-color: #ffffff;
+                height: 80%;">
+                    <h1 class="text-center"><i class="material-icons" style="font-size:200%">report</i></h1>
+                    <h3 class="text-center">SORRY! 该词条尚未被收录或识别不出...</h3>
+                    <hr>
+                    <p class="text-center">点击<a href="#" data-toggle="modal" data-target="#addModal"
+                            title="添加">添加词条</a>帮助我们完善数据库</p>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+        <!-- 科普 -->
+        <div class="container container--wide">
+            <div id="tips" style="padding-top: 20px;margin-bottom:12px">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h1 display-3 style="color: whitesmoke"><i
+                                class="material-icons md-30">widgets</i>&nbsp;&nbsp;生活垃圾分类科普</h1>
+                        <hr>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-property">
+                            <div style="background-color: rgb(229,52,32)">
+                                <a href="https://baike.baidu.com/item/%E6%9C%89%E5%AE%B3%E5%9E%83%E5%9C%BE">
+                                    <img src="/images/waste-1.png" class="card-img" alt="有害垃圾">
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <div class="lead" style="color: rgb(229,52,32);font-weight: bold">
+                                    对人体健康或者自然环境造成直接或者潜在危害的零星废弃物，单位集中产生的除外。</div><br>主要包括：
+                                <hr>
+                                <ul class="list-unstyled m-0">
+                                    <li class="d-flex mb-1">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>废电池</span>
+                                    </li>
+                                    <li class="d-flex mb-1">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>废灯管</span>
+                                    </li>
+                                    <li class="d-flex mb-1">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>废药品</span>
+                                    </li>
+                                    <li class="d-flex mb-1">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>废油漆桶 等</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-property">
+                            <div style="background-color: rgb(0,70,131)">
+
+                                <a href="https://baike.baidu.com/item/%E5%8F%AF%E5%9B%9E%E6%94%B6%E7%89%A9">
+                                    <img src="/images/waste-2.png" class="card-img" alt="property">
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <div class="lead" style="color: rgb(0,70,131);font-weight: bold">适宜回收和可循环再利用的废弃物。</div>
+                                <br>主要包括：
+                                <hr>
+                                <ul class="list-unstyled m-0">
+                                    <li class="d-flex mb-2">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>废玻璃</span>
+                                    </li>
+                                    <li class="d-flex mb-2">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>废金属</span>
+                                    </li>
+                                    <li class="d-flex mb-2">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>废塑料</span>
+                                    </li>
+                                    <li class="d-flex mb-2">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>废纸张</span>
+                                    </li>
+                                    <li class="d-flex mb-1">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>废编织物 等</span>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-property">
+                            <div style="background-color: rgb(100,62,50)">
+
+                                <a href="https://baike.baidu.com/item/%E6%B9%BF%E5%9E%83%E5%9C%BE">
+                                    <img src="/images/waste-3.png" class="card-img" alt="property">
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <div class="lead" style="color: rgb(100,62,50);font-weight: bold">易腐的生物质废弃物。</div>
+                                <br>主要包括：
+                                <hr>
+                                <ul class="list-unstyled m-0">
+                                    <li class="d-flex mb-2">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>剩菜剩饭</span>
+                                    </li>
+                                    <li class="d-flex mb-2">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>瓜皮果核</span>
+                                    </li>
+                                    <li class="d-flex mb-2">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>花卉绿植</span>
+                                    </li>
+                                    <li class="d-flex mb-2">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>肉类碎骨</span>
+                                    </li>
+                                    <li class="d-flex mb-1">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>过期食品</span>
+                                    </li>
+                                    <li class="d-flex mb-1">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>餐厨垃圾 等</span>
+                                    </li>
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-property">
+                            <div style="background-color: rgb(44,42,38)">
+
+                                <a href="https://baike.baidu.com/item/%E5%B9%B2%E5%9E%83%E5%9C%BE">
+                                    <img src="/images/waste-4.png" class="card-img" alt="property">
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <div class="lead" style="color: rgb(44,42,38);font-weight: bold">
+                                    有害垃圾、可回收物、湿垃圾以外的其他生活废弃物。</div><br>主要包括：
+                                <hr>
+                                <ul class="list-unstyled m-0">
+                                    <li class="d-flex mb-2">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>餐盒</span>
+                                    </li>
+                                    <li class="d-flex mb-2">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>塑料袋、食品包装袋</span>
+                                    </li>
+                                    <li class="d-flex mb-2">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>烟蒂</span>
+                                    </li>
+                                    <!-- <li class="d-flex mb-2">
+                                            <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                            <span>污染严重的纸</span>
+                                        </li> -->
+                                    <li class="d-flex mb-2">
+                                        <i class="material-icons md-18 align-middle mr-2 text-muted">label</i>
+                                        <span>餐巾纸、湿纸巾 等</span>
+                                    </li>
+                                    <li class="d-flex mb-1"></li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 联系我们 -->
+        <div style="background-color: rgb(211, 211, 211);color:white;height:111%;padding-top: 20px;" id="contact">
+            <div class="container container--wide">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h1 display-3 style="color: darkslategrey"><i
+                                class="material-icons md-30">contacts</i>&nbsp;&nbsp;联系我们</h1>
+                        <hr>
+                    </div>
+
+                </div>
+                <div class="card card-property col-md-12 col-lg-12"
+                    style="border-radius: 20px 20px 0px 0px;padding-top:10px;padding-bottom:10px;">
+                    <div class="row" style="color:darkslategrey">
+
+                        <div class="col-md-6 col-lg-3">
+                            <img src="/images/icon2.jpg" style="width: 100%">
+                        </div>
+                        <div class="col-md-6 col-lg-9"
+                            style="padding-bottom: 20px;padding-top: 30px;padding-left:20px;">
+                            <h2 class="display-5">顾 颖 <span style="color: rgb(214, 214, 214)"> GU YING</span></h2>
+                            <hr>
+                            <ul class="list-unstyled m-0">
+                                <li class="d-flex mb-3">
+                                    <i class="material-icons md-18 align-middle mr-2 text-muted">email</i>
+                                    <span> 15927024558@163.com</span>
+                                </li>
+                                <li class="d-flex mb-3">
+
+                                    <i class="material-icons md-18 align-middle mr-2 text-muted">person_pin_circle</i>
+                                    <span> 湖北省武汉市洪山区武汉大学国家网络安全学院</span>
+                                </li>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-property col-md-12 col-lg-12"
+                    style="border-radius: 0px 0px 20px 20px;padding-top:10px;padding-bottom:10px;">
+                    <div class="row" style="color:darkslategrey">
+
+
+                        <div class="col-md-6 col-lg-9"
+                            style="padding-bottom: 20px;padding-top: 30px;padding-left:40px;">
+                            <h2 class="display-5"> 罗兼慧 <span style="color: rgb(214, 214, 214)"> LUO JIANHUI</span></h2>
+                            <hr>
+                            <ul class="list-unstyled m-0">
+                                <li class="d-flex mb-3">
+                                    <i class="material-icons md-18 align-middle mr-2 text-muted">email</i>
+                                    <span> 284392201@qq.com</span>
+                                </li>
+                                <li class="d-flex mb-3">
+
+                                    <i class="material-icons md-18 align-middle mr-2 text-muted">person_pin_circle</i>
+                                    <span> 湖北省武汉市洪山区武汉大学国家网络安全学院</span>
+                                </li>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <img src="/images/icon1.jpg" style="width: 100%">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- 模态框 -->
+    <!-- ADD添加模态框 -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">添加</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <form method="post" name="form1" action="/rub/useradd" enctype="multipart/form-data">
+
+                    <div class="modal-body">
+                        <div class="form-group1">
+                            <label for="txt_wastename">垃圾名称</label>
+                            <input type="text" name="add_name" class="form-control" id="txt_departmentname"
+                                placeholder="垃圾名称">
+                        </div>
+                        <div class="form-group1">
+                            <label for="txt_class">类别</label>
+                            <select class="form-control" name="add_cate" id="exampleFormControlSelect1">
+                                <option>可回收垃圾</option>
+                                <option>干垃圾</option>
+                                <option>湿垃圾</option>
+                                <option>有害垃圾</option>
+                            </select>
+                        </div>
+                        <div class="form-group1">
+                            <!-- <label for="txt-file">图片</label> -->
+                            <label for="txt_file">图片</label>
+                            <div class="custom-file">
+                                <input type="file" name="file1" class="custom-file-input" id="upFile1">
+                                <label class="custom-file-label">上传图片</label>
+                            </div>
+                        </div>
+                        <div class="form-group1">
+                            <label for="txt_wastelocate">地区</label>
+                            <input id="city-picker3" name="add_loc" class="form-control" readonly type="text"
+                                value="上海市/上海市" data-toggle="city-picker">
+                        </div>
+                        <div class="form-group1">
+                            <label for="txt_remark">备注</label>
+                            <textarea class="form-control" name="add_detail" id="exampleFormControlTextarea1"
+                                rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group1">
+                            <button type="reset" class="btn btn-white">重置</button>
+                            <button type="submit" class="btn btn-success">保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- // END ADD -->
+
+    <!-- EDIT修改模态框 -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">修改</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+
+                <form action="/rub/useredit" method="post" name="form2" enctype="multipart/form-data">
+
+                    <div class="modal-body">
+                        <div class="form-group2">
+                            <input type="hidden" name="e_rid" id="e_rid" value="">
+                            <label for="txt_wastename">垃圾名称</label>
+                            <input type="text" name="ename" class="form-control" id="ename" readonly="readonly" value="">
+                        </div>
+
+                        <div class="form-group2">
+                            <label for="txt_class">类别</label>
+                            <select class="form-control" name="ecate" id="updatecate">
+                                <option>可回收垃圾</option>
+                                <option>干垃圾</option>
+                                <option>湿垃圾</option>
+                                <option>有害垃圾</option>
+                            </select>
+                        </div>
+                        <div class="form-group2">
+                            <!-- <label for="txt-file">图片</label> -->
+                            <label for="txt_file">图片</label>
+                            <div class="custom-file">
+                                <input type="file" name="file2" class="custom-file-input" id="upFile2">
+                                <label class="custom-file-label">上传图片</label>
+                            </div>
+                        </div>
+                        <div class="form-group2">
+                            <label for="txt_wastelocate">地区</label>
+                            <input id="eloc" name="eloc" class="form-control" readonly="readonly" type="text" value="">
+                        </div>
+                        <div class="form-group2">
+                            <label for="txt_remark">备注</label>
+                            <textarea class="form-control" name="edetail" id="updatedetail" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group2">
+                            <button type="reset" class="btn btn-white">重置</button>
+                            <button type="submit" class="btn btn-success">保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- // END ADD -->
+
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="/vendor/popper.js"></script>
+    <script src="/vendor/bootstrap.min.js"></script>
+
+    <!-- APP -->
+    <script src="/js/color_variables.js"></script>
+    <script src="/js/app.js"></script>
+
+
+    <script src="/vendor/dom-factory.js"></script>
+    <!-- DOM Factory -->
+    <script src="/vendor/material-design-kit.js"></script>
+    <!-- MDK -->
+
+    <!-- city-picker -->
+    <script src="/city-picker/js/jquery.js"></script>
+    <script src="/city-picker/js/bootstrap.js"></script>
+    <script src="/city-picker/js/city-picker.data.js"></script>
+    <script src="/city-picker/js/city-picker.js"></script>
+    <script src="/city-picker/js/main.js"></script>
+
+    <script>
+        function showopt() {
+            if ($('#myoption').css('display') == 'none') {
+                $('#myoption').css('display', 'block');
+                if ($(window).width() < 992) {
+                    $('#top').css('height', '150%');
+                }
+
+            } else {
+                $('#myoption').css('display', 'none');
+                $('#top').css('height', '100%');
+            }
+        };
+        function usepics() {
+            var isChecked = $('#customFile').attr("disabled");
+            if (isChecked) {
+                $('#search').attr("disabled", true);
+                $('#customFile').removeAttr("disabled");
+            }
+            else {
+                $('#search').removeAttr("disabled");
+                $('#customFile').attr("disabled", true);
+            }
+        }
+    </script>
+
+    <script>
+        $(function(){
+            $('.modleDailog').modal("hide");
+        });
+
+        function disedit(id,name,location){
+            $('#e_rid').attr('value',id);
+            $('#ename').attr('value',name);
+            $('#eloc').attr('value',location);
+
+        }
+
+    </script>
+
+    <script type="text/javascript">
+        $("#loading").fadeOut(2000);
+        if([[${not #strings.isEmpty(isResult)}]]){
+            window.location.hash="#result";
+        }
+    </script>
+
+</body>
+
+</html>

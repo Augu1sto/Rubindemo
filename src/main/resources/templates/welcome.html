@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>RUBIN后台管理系统</title>
+
+
+    <link type="text/css" href="/css/vendor-morris.css" rel="stylesheet">
+    <link type="text/css" href="/css/vendor-bootstrap-datepicker.css" rel="stylesheet">
+
+    <!-- Prevent the demo from appearing in search engines -->
+    <meta name="robots" content="noindex">
+
+    <!-- App CSS -->
+    <link type="text/css" href="/css/app.css" rel="stylesheet">
+    <link type="text/css" href="/css/app.rtl.css" rel="stylesheet">
+
+    <!-- Simplebar -->
+    <link type="text/css" href="/vendor/simplebar.css" rel="stylesheet">
+    <link type="text/css" href="/css/mystyle.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <div id="loading" style="backgroud-color:rgba(255, 255, 255, 0.95);width:100%;height:100%;"><div class="loading-dots-fast"></div></div>
+    <div class="mdk-drawer-layout js-mdk-drawer-layout" data-fullbleed data-push data-responsive-width="992px"
+        data-has-scrolling-region>
+
+        <div class="mdk-drawer-layout__content">
+            <!-- header-layout -->
+            <div
+                class="mdk-header-layout js-mdk-header-layout  mdk-header--fixed  mdk-header-layout__content--scrollable">
+                <!-- header -->
+                <div class="mdk-header js-mdk-header bg-white" data-fixed>
+                    <div class="mdk-header__content">
+
+                        <nav class="navbar navbar-expand-md bg-white navbar-dark d-flex-none">
+                            <button class="btn btn-link text-white pl-0" type="button" data-toggle="sidebar">
+                                <i class="material-icons align-middle md-36">short_text</i>
+                            </button>
+                            <div class="page-title m-0"><a href="index"><img src="/images/logo1.png"></a> 后台管理系统</div>
+
+                            <div class="collapse navbar-collapse" id="mainNavbar">
+                                <ul class="navbar-nav ml-auto align-items-center">
+
+                                    <li class="nav-item nav-divider">
+                                    <li class="nav-item">
+                                        <a href="login" class="nav-link"><i class="material-icons"
+                                                style="font-size: 20px;">exit_to_app</i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- content -->
+                <div class="mdk-header-layout__content top-navbar mdk-header-layout__content--scrollable h-100">
+                    <!-- main content -->
+                    <div class="container-fluid">
+                        <h2 class="display-3" style="color: darkslategrey">WELCOME!</h2>
+                        <p class="lead">
+                            欢迎来到RUBIN后台管理系统，在这里，你可以...
+                        </p>
+                        <hr>
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">管理：添加|修改|删除数据库中的垃圾分类条目</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <a href="manage#w1">
+                                            <button type="button" class="btn btn-outline-recyc btn-block">可回收垃圾</button>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a href="manage#w2">
+
+                                            <button type="button" class="btn btn-outline-resid btn-block">干垃圾</button>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a href="manage#w3">
+
+                                            <button type="button"
+                                                class="btn btn-outline-household btn-block">湿垃圾</button>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a href="manage#w4">
+
+                                            <button type="button" class="btn btn-outline-hazar btn-block">有害垃圾</button>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">审核：审核用户提交的添加或者修改的垃圾分类条目</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <a href="checkadd">
+                                            <button type="button"
+                                                class="btn btn-outline-success btn-block">用户添加</button>
+
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a href="checkedit">
+                                            <button type="button"
+                                                class="btn btn-outline-success btn-block">用户修改</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- // END drawer-layout__content -->
+
+        <!-- drawer -->
+        <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
+            <div class="mdk-drawer__content">
+                <div class="mdk-drawer__inner" data-simplebar data-simplebar-force-enabled="true">
+
+                    <nav class="drawer  drawer--dark">
+                        <div class="drawer-spacer">
+                            <div class="media align-items-center">
+                                <a href="welcome" class="drawer-brand-circle mr-2"><div th:text="${session.adm.admname[0]}"></div></a>
+                                <div class="media-body">
+                                    <a href="welcome" class="h5 m-0 text-link"><div th:text="${session.adm.admname}"></div></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- HEADING1 -->
+                        <div class="py-2 drawer-heading">
+                            管理
+                        </div>
+
+                        <!-- MENU1 -->
+                        <ul class="drawer-menu" id="mainMenu" data-children=".drawer-submenu">
+                            <li class="drawer-menu-item drawer-submenu">
+                                <a data-toggle="collapse" data-parent="#mainMenu" href="#"
+                                    data-target="#uiComponentsMenu" aria-controls="uiComponentsMenu"
+                                    aria-expanded="false" class="collapsed">
+                                    <i class="material-icons">storage</i>
+                                    <span class="drawer-menu-text"> 数据管理</span>
+                                </a>
+                                <ul class="collapse " id="uiComponentsMenu">
+                                    <li class="drawer-menu-item active"><a href="manage#w1">可回收垃圾</a></li>
+                                    <li class="drawer-menu-item"><a href="manage#w2">干垃圾</a></li>
+                                    <li class="drawer-menu-item"><a href="manage#w3">湿垃圾</a></li>
+                                    <li class="drawer-menu-item"><a href="manage#w4">有害垃圾</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                        <!-- HEADING2 -->
+                        <div class="py-2 drawer-heading">
+                            审核
+                        </div>
+
+                        <!-- MENU1 -->
+                        <ul class="drawer-menu" id="mainMenu" data-children=".drawer-submenu">
+                            <li class="drawer-menu-item">
+                                <a href="checkadd">
+                                    <i class="material-icons">add_box</i>
+                                    <span class="drawer-menu-text"> 用户添加</span>
+                                    <span class="badge badge-pill badge-success ml-1" th:text="${countadd}"></span>
+                                </a>
+                            </li>
+                            <li class="drawer-menu-item">
+                                <a href="checkedit">
+                                    <i class="material-icons">autorenew</i>
+                                    <span class="drawer-menu-text"> 用户修改</span>
+                                    <span class="badge badge-pill badge-success ml-1" th:text="${countedit}"></span>
+                                </a>
+                            </li>
+                        </ul>
+
+
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- // END drawer -->
+
+        <!-- drawer -->
+
+        <!-- // END drawer -->
+
+    </div>
+    <!-- // END drawer-layout -->
+
+
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="/vendor/popper.js"></script>
+    <script src="/vendor/bootstrap.min.js"></script>
+
+    <!-- Simplebar -->
+    <!-- Used for adding a custom scrollbar to the drawer -->
+    <script src="/vendor/simplebar.js"></script>
+
+
+    <!-- Vendor -->
+    <script src="/vendor/Chart.min.js"></script>
+    <script src="/vendor/moment.min.js"></script>
+
+    <!-- APP -->
+    <script src="/js/color_variables.js"></script>
+    <script src="/js/app.js"></script>
+
+
+    <script src="/vendor/dom-factory.js"></script>
+    <!-- DOM Factory -->
+    <script src="/vendor/material-design-kit.js"></script>
+    <!-- MDK -->
+
+
+
+    <script>
+        (function () {
+            'use strict';
+            // Self Initialize DOM Factory Components
+            domFactory.handler.autoInit()
+
+
+            // Connect button(s) to drawer(s)
+            var sidebarToggle = document.querySelectorAll('[data-toggle="sidebar"]')
+
+            sidebarToggle.forEach(function (toggle) {
+                toggle.addEventListener('click', function (e) {
+                    var selector = e.currentTarget.getAttribute('data-target') || '#default-drawer'
+                    var drawer = document.querySelector(selector)
+                    if (drawer) {
+                        if (selector == '#default-drawer') {
+                            $('.container-fluid').toggleClass('container--max');
+                        }
+                        drawer.mdkDrawer.toggle();
+                    }
+                })
+            })
+        })()
+    </script>
+
+
+    <script src="/vendor/morris.min.js"></script>
+    <script src="/vendor/raphael.min.js"></script>
+    <script src="/vendor/bootstrap-datepicker.min.js"></script>
+    <script src="/js/datepicker.js"></script>
+
+    <script>
+
+
+        $(document).ready(function () {
+            $(".drawer-menu").find("li").each(function () {
+                var a = $(this).find("a:first")[0];
+                if ($(a).attr("href") === document.location.href.split("/")[document.location.href.split("/").length - 1]) {
+                    $(this).addClass("active");
+                } else {
+                    $(this).removeClass("active");
+                }
+            });
+        });
+
+
+    </script>
+
+    <script type="text/javascript">
+        $("#loading").fadeOut(2000)
+    </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>RUBIN后台管理系统</title>
+
+
+    <link type="text/css" href="/css/vendor-morris.css" rel="stylesheet">
+    <link type="text/css" href="/css/vendor-bootstrap-datepicker.css" rel="stylesheet">
+
+    <!-- Prevent the demo from appearing in search engines -->
+    <meta name="robots" content="noindex">
+
+    <!-- App CSS -->
+    <link type="text/css" href="/css/app.css" rel="stylesheet">
+    <link type="text/css" href="/css/app.rtl.css" rel="stylesheet">
+
+    <!-- Simplebar -->
+    <link type="text/css" href="/vendor/simplebar.css" rel="stylesheet">
+
+    <!--city-picker-->
+    <link href="/city-picker/css/city-picker.css" rel="stylesheet" type="text/css" />
+
+
+    <!-- Mystyle -->
+    <link type="text/css" href="/css/mystyle.css" rel="stylesheet">
+
+    <!-- editable -->
+    <link href="/css/bootstrap-editable.css" rel="stylesheet" />
+
+    <link href="/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="loading" style="background-color:rgba(255, 255, 255, 0.95);width:100%;height:100%;"><div class="loading-dots-fast"></div></div>
+
+    <div class="mdk-drawer-layout js-mdk-drawer-layout" data-fullbleed data-push data-responsive-width="992px"
+        data-has-scrolling-region>
+
+        <div class="mdk-drawer-layout__content">
+            <!-- header-layout -->
+            <div
+                class="mdk-header-layout js-mdk-header-layout  mdk-header--fixed  mdk-header-layout__content--scrollable">
+                <!-- header -->
+                <div class="mdk-header js-mdk-header bg-white" data-fixed>
+                    <div class="mdk-header__content">
+
+                        <nav class="navbar navbar-expand-md bg-white navbar-dark d-flex-none">
+                            <button class="btn btn-link text-white pl-0" type="button" data-toggle="sidebar">
+                                <i class="material-icons align-middle md-36">short_text</i>
+                            </button>
+                            <div class="page-title m-0"><a href="index"><img src="/images/logo1.png"></a> 后台管理系统</div>
+
+                            <div class="collapse navbar-collapse" id="mainNavbar">
+                                <ul class="navbar-nav ml-auto align-items-center">
+
+                                    <li class="nav-item nav-divider">
+                                    <li class="nav-item">
+                                        <a href="login" class="nav-link"><i class="material-icons"
+                                                style="font-size: 20px;">exit_to_app</i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- content -->
+                <div class="mdk-header-layout__content top-navbar mdk-header-layout__content--scrollable h-100">
+                    <!-- main content -->
+                    <div class="container-fluid">
+                        <h1 style="color: darkslategrey">数据管理</h1>
+                        <p class="lead">
+                            在这里您可以添加/删除/修改相应分类的垃圾数据条目
+                        </p>
+                        <hr>
+                        <div id="w1" style="margin-top: -65px;padding-top: 65px;">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>
+                                        可回收垃圾 <button class="btn btn-success btn-sm"
+                                            style="border-radius: 1rem;  padding: 0rem 0.35rem;" data-toggle="modal"
+                                            data-target="#addModal" title="添加">+</button>
+                                    </h3>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>编号</th>
+                                                <th>名称</th>
+                                                <th>类别</th>
+                                                <th>预览图</th>
+                                                <th>地区</th>
+                                                <th>备注</th>
+                                                <th>添加时间</th>
+                                                <th>操作</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="Rubbish:${recycLists}">
+                                                <td th:text="${Rubbish.getRubid()}"></td>
+                                                <td th:text="${Rubbish.rubname}"></td>
+                                                <td th:text="${Rubbish.rubcate}"></td>
+                                                <td>
+                                                    <a href="#" title="查看" data-toggle="modal" data-target="#picModal" th:onclick="imgsrc([[${Rubbish.rubimg}]]);"><i
+                                                            class="material-icons"
+                                                            style="color: rgb(98, 98, 98)">zoom_in</i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                </td>
+                                                <td th:text="${Rubbish.rubloc}"></td>
+                                                <td th:text="${Rubbish.rubdetail}"></td>
+                                                <td th:text="${{Rubbish.adddate}}"></td>
+                                                <td>
+                                                    <a href="#" data-toggle="modal"  title="修改" data-target="#editModal" th:onclick="disedit([[${Rubbish.rubid}]],[[${Rubbish.rubname}]],[[${Rubbish.rubloc}]]);"><button
+                                                            class="btn btn-outline-success btn-sm"
+                                                            style="border-radius: 1rem;  padding: 0.1rem 0.25rem;"><i
+                                                            class="material-icons"
+                                                            style="font-size: 15px;vertical-align: middle;">edit</i></button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <a th:href="@{'del/'+${Rubbish.rubid}}" title="删除"><button class="btn btn-outline-danger btn-sm"
+                                                                                                               style="border-radius: 1rem;  padding: 0.1rem 0.25rem;"><i
+                                                            class="material-icons"
+                                                            style="font-size: 15px;vertical-align: middle;">delete_forever</i></button></a>
+                                                </td>
+
+
+                                            </tr>
+
+                                        </tbody>
+
+                                        <tfoot>
+
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div id="w2" style="margin-top: -65px;padding-top: 65px;">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>
+                                        干垃圾 <button class="btn btn-success btn-sm"
+                                            style="border-radius: 1rem;  padding: 0rem 0.35rem;" data-toggle="modal"
+                                            data-target="#addModal" title="添加">+</button>
+                                    </h3>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                            <th>编号</th>
+                                            <th>名称</th>
+                                            <th>类别</th>
+                                            <th>预览图</th>
+                                            <th>地区</th>
+                                            <th>备注</th>
+                                            <th>添加时间</th>
+                                            <th>操作</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="Rubbish:${residLists}">
+                                            <td th:text="${Rubbish.getRubid()}"></td>
+                                            <td th:text="${Rubbish.rubname}"></td>
+                                            <td th:text="${Rubbish.rubcate}"></td>
+                                            <td>
+                                                <a href="#" title="查看" data-toggle="modal" data-target="#picModal" th:onclick="imgsrc([[${Rubbish.rubimg}]]);"><i
+                                                        class="material-icons"
+                                                        style="color: rgb(98, 98, 98)">zoom_in</i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </td>
+                                            <td th:text="${Rubbish.rubloc}"></td>
+                                            <td th:text="${Rubbish.rubdetail}"></td>
+                                            <td th:text="${{Rubbish.adddate}}"></td>
+                                            <td>
+                                                <a href="#" data-toggle="modal"  title="修改" data-target="#editModal" th:onclick="disedit([[${Rubbish.rubid}]],[[${Rubbish.rubname}]],[[${Rubbish.rubloc}]]);"><button
+                                                        class="btn btn-outline-success btn-sm"
+                                                        style="border-radius: 1rem;  padding: 0.1rem 0.25rem;"><i
+                                                        class="material-icons"
+                                                        style="font-size: 15px;vertical-align: middle;">edit</i></button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <a th:href="@{'del/'+${Rubbish.rubid}}" title="删除"><button class="btn btn-outline-danger btn-sm"
+                                                                                                           style="border-radius: 1rem;  padding: 0.1rem 0.25rem;"><i
+                                                        class="material-icons"
+                                                        style="font-size: 15px;vertical-align: middle;">delete_forever</i></button></a>
+                                            </td>
+
+
+                                        </tr>
+
+                                        </tbody>
+
+                                        <tfoot>
+
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div id="w3" style="margin-top: -65px;padding-top: 65px;">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>
+                                        湿垃圾 <button class="btn btn-success btn-sm"
+                                            style="border-radius: 1rem;  padding: 0rem 0.35rem;" data-toggle="modal"
+                                            data-target="#addModal" title="添加">+</button>
+                                    </h3>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                            <th>编号</th>
+                                            <th>名称</th>
+                                            <th>类别</th>
+                                            <th>预览图</th>
+                                            <th>地区</th>
+                                            <th>备注</th>
+                                            <th>添加时间</th>
+                                            <th>操作</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="Rubbish:${householdLists}">
+                                            <td th:text="${Rubbish.getRubid()}"></td>
+                                            <td th:text="${Rubbish.rubname}"></td>
+                                            <td th:text="${Rubbish.rubcate}"></td>
+                                            <td>
+                                                <a href="#" title="查看" data-toggle="modal" data-target="#picModal" th:onclick="imgsrc([[${Rubbish.rubimg}]]);"><i
+                                                        class="material-icons"
+                                                        style="color: rgb(98, 98, 98)">zoom_in</i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </td>
+                                            <td th:text="${Rubbish.rubloc}"></td>
+                                            <td th:text="${Rubbish.rubdetail}"></td>
+                                            <td th:text="${{Rubbish.adddate}}"></td>
+                                            <td>
+                                                <a href="#" data-toggle="modal"  title="修改" data-target="#editModal" th:onclick="disedit([[${Rubbish.rubid}]],[[${Rubbish.rubname}]],[[${Rubbish.rubloc}]]);"><button
+                                                        class="btn btn-outline-success btn-sm"
+                                                        style="border-radius: 1rem;  padding: 0.1rem 0.25rem;"><i
+                                                        class="material-icons"
+                                                        style="font-size: 15px;vertical-align: middle;">edit</i></button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <a th:href="@{'del/'+${Rubbish.rubid}}" title="删除"><button class="btn btn-outline-danger btn-sm"
+                                                                                                           style="border-radius: 1rem;  padding: 0.1rem 0.25rem;"><i
+                                                        class="material-icons"
+                                                        style="font-size: 15px;vertical-align: middle;">delete_forever</i></button></a>
+                                            </td>
+
+                                        </tr>
+
+                                        </tbody>
+
+                                        <tfoot>
+
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div id="w4" style="margin-top: -65px;padding-top: 65px;">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>
+                                        有害垃圾 <button class="btn btn-success btn-sm"
+                                            style="border-radius: 1rem;  padding: 0rem 0.35rem;" data-toggle="modal"
+                                            data-target="#addModal" title="添加">+</button>
+                                    </h3>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                            <th>编号</th>
+                                            <th>名称</th>
+                                            <th>类别</th>
+                                            <th>预览图</th>
+                                            <th>地区</th>
+                                            <th>备注</th>
+                                            <th>添加时间</th>
+                                            <th>操作</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="Rubbish:${hazarLists}">
+                                            <td th:text="${Rubbish.getRubid()}"></td>
+                                            <td th:text="${Rubbish.rubname}"></td>
+                                            <td th:text="${Rubbish.rubcate}"></td>
+                                            <td>
+                                                <a href="#" title="查看" data-toggle="modal" data-target="#picModal" th:onclick="imgsrc([[${Rubbish.rubimg}]]);"><i
+                                                        class="material-icons"
+                                                        style="color: rgb(98, 98, 98)">zoom_in</i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </td>
+                                            <td th:text="${Rubbish.rubloc}"></td>
+                                            <td th:text="${Rubbish.rubdetail}"></td>
+                                            <td th:text="${{Rubbish.adddate}}"></td>
+                                            <td>
+                                                <a href="#" data-toggle="modal"  title="修改" data-target="#editModal" th:onclick="disedit([[${Rubbish.rubid}]],[[${Rubbish.rubname}]],[[${Rubbish.rubloc}]]);"><button
+                                                        class="btn btn-outline-success btn-sm"
+                                                        style="border-radius: 1rem;  padding: 0.1rem 0.25rem;"><i
+                                                        class="material-icons"
+                                                        style="font-size: 15px;vertical-align: middle;">edit</i></button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <a th:href="@{'del/'+${Rubbish.rubid}}" title="删除"><button class="btn btn-outline-danger btn-sm"
+                                                                                                style="border-radius: 1rem;  padding: 0.1rem 0.25rem;"><i
+                                                        class="material-icons"
+                                                        style="font-size: 15px;vertical-align: middle;">delete_forever</i></button></a>
+                                            </td>
+
+                                        </tr>
+
+                                        </tbody>
+
+                                        <tfoot>
+
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- // END drawer-layout__content -->
+
+        <!-- drawer -->
+        <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
+            <div class="mdk-drawer__content">
+                <div class="mdk-drawer__inner" data-simplebar data-simplebar-force-enabled="true">
+
+                    <nav class="drawer  drawer--dark">
+                        <div class="drawer-spacer">
+                            <div class="media align-items-center">
+                                <a href="welcome" class="drawer-brand-circle mr-2"><div th:text="${session.adm.admname[0]}"></div></a>
+                                <div class="media-body">
+                                    <a href="welcome" class="h5 m-0 text-link"><div th:text="${session.adm.admname}"></div></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- HEADING1 -->
+                        <div class="py-2 drawer-heading">
+                            管理
+                        </div>
+
+                        <!-- MENU1 -->
+                        <ul class="drawer-menu" id="mainMenu" data-children=".drawer-submenu">
+                            <li class="drawer-menu-item drawer-submenu">
+                                <a data-toggle="collapse" data-parent="#mainMenu" href="#"
+                                    data-target="#uiComponentsMenu" aria-controls="uiComponentsMenu"
+                                    aria-expanded="false" class="collapsed">
+                                    <i class="material-icons">storage</i>
+                                    <span class="drawer-menu-text"> 数据管理</span>
+                                </a>
+                                <ul class="collapse " id="uiComponentsMenu">
+                                    <li class="drawer-menu-item active"><a href="manage#w1">可回收垃圾</a></li>
+                                    <li class="drawer-menu-item"><a href="manage#w2">干垃圾</a></li>
+                                    <li class="drawer-menu-item"><a href="manage#w3">湿垃圾</a></li>
+                                    <li class="drawer-menu-item"><a href="manage#w4">有害垃圾</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                        <!-- HEADING2 -->
+                        <div class="py-2 drawer-heading">
+                            审核
+                        </div>
+
+                        <!-- MENU1 -->
+                        <ul class="drawer-menu" id="mainMenu" data-children=".drawer-submenu">
+                            <li class="drawer-menu-item">
+                                <a href="checkadd">
+                                    <i class="material-icons">add_box</i>
+                                    <span class="drawer-menu-text"> 用户添加</span>
+                                    <span class="badge badge-pill badge-success ml-1" th:text="${countadd}"></span>
+                                </a>
+                            </li>
+                            <li class="drawer-menu-item">
+                                <a href="checkedit">
+                                    <i class="material-icons">autorenew</i>
+                                    <span class="drawer-menu-text"> 用户修改</span>
+                                    <span class="badge badge-pill badge-success ml-1" th:text="${countedit}"></span>
+                                </a>
+                            </li>
+                        </ul>
+
+
+
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- // END drawer -->
+
+        <!-- drawer -->
+
+        <!-- // END drawer -->
+
+    </div>
+    <!-- // END drawer-layout -->
+    <!-- 模态框 -->
+    <!-- ADD添加模态框 -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">添加</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="/rub/manage" method="post" name="form1" enctype="multipart/form-data">
+
+                <div class="modal-body">
+                    <div class="form-group1">
+                        <label for="txt_wastename">垃圾名称</label>
+                        <input type="text" name="rubname" class="form-control" id="txt_departmentname" placeholder="垃圾名称">
+                    </div>
+                    <div class="form-group1">
+                        <label for="txt_class">类别</label>
+                        <select class="form-control" name="rubcate" id="exampleFormControlSelect1">
+                            <option>可回收垃圾</option>
+                            <option>干垃圾</option>
+                            <option>湿垃圾</option>
+                            <option>有害垃圾</option>
+                        </select>
+                    </div>
+                    <div class="form-group1">
+                        <!-- <label for="txt-file">图片</label> -->
+                        <label for="txt_file">图片</label>
+                        <div class="custom-file">
+                            <input type="file" name="file1" class="custom-file-input" id="upFile1">
+                            <label class="custom-file-label" for="customFile">上传图片</label>
+                        </div>
+                    </div>
+                    <div class="form-group1">
+                        <label for="txt_wastelocate">地区</label>
+                        <input id="city-picker3" name="rubloc" class="form-control" readonly type="text" value="上海市/上海市" data-toggle="city-picker">
+                    </div>
+                    <div class="form-group1">
+                        <label for="txt_remark">备注</label>
+                        <textarea class="form-control" name="rubdetail" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+               </div>
+                <div class="modal-footer">
+                    <div class="form-group1">
+                        <button type="reset" class="btn btn-white">重置</button>
+                        <button type="submit" class="btn btn-success">保存</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- // END ADD -->
+
+    <!-- EDIT修改模态框 -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">修改</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+
+                <form action="/rub/update" method="post" name="form2" enctype="multipart/form-data">
+
+                <div class="modal-body">
+                    <div class="form-group2">
+                        <input type="hidden" name="rubid" id="updateid" value="">
+                        <label for="txt_wastename">垃圾名称</label>
+                        <input type="text" name="rubname" class="form-control" id="updatename" disabled="true" value="">
+                    </div>
+
+                    <div class="form-group2">
+                        <label for="txt_class">类别</label>
+                        <select class="form-control" name="rubcate" id="updatecate">
+                            <option>可回收垃圾</option>
+                            <option>干垃圾</option>
+                            <option>湿垃圾</option>
+                            <option>有害垃圾</option>
+                        </select>
+                    </div>
+                    <div class="form-group2">
+                        <!-- <label for="txt-file">图片</label> -->
+                        <label for="txt_file">图片</label>
+                        <div class="custom-file">
+                            <input type="file" name="file2" class="custom-file-input" id="upFile2">
+                            <label class="custom-file-label" for="customFile">上传图片</label>
+                        </div>
+                    </div>
+                    <div class="form-group2">
+                        <label for="txt_wastelocate">地区</label>
+                        <input id="updateloc" name="rubloc" class="form-control" readonly type="text" disabled="true" value="">
+                    </div>
+                    <div class="form-group2">
+                        <label for="txt_remark">备注</label>
+                        <textarea class="form-control" name="rubdetail" id="updatedetail" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group2">
+                        <button type="reset" class="btn btn-white">重置</button>
+                        <button type="submit" class="btn btn-success">保存</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- // END ADD -->
+
+
+
+    <!-- PIC图片模态框 -->
+    <div class="modal fade" id="picModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <i class="material-icons" style="color: #7bb859">photo_size_select_actual</i>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <img id="showimg" src="" width="100%" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- //END PIC -->
+
+
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="/vendor/popper.js"></script>
+    <script src="/vendor/bootstrap.min.js"></script>
+
+    <!-- Simplebar -->
+    <!-- Used for adding a custom scrollbar to the drawer -->
+    <script src="/vendor/simplebar.js"></script>
+
+
+    <!-- Vendor -->
+    <script src="/vendor/Chart.min.js"></script>
+    <script src="/vendor/moment.min.js"></script>
+
+    <!-- APP -->
+    <script src="/js/color_variables.js"></script>
+    <script src="/js/app.js"></script>
+
+
+    <script src="/vendor/dom-factory.js"></script>
+    <!-- DOM Factory -->
+    <script src="/vendor/material-design-kit.js"></script>
+    <!-- MDK -->
+
+    <!-- editable -->
+    <script src="/js/bootstrap-editable.min.js"></script>
+    <!-- <script src="/js/bootstrap-editable.js"></script> -->
+
+    <script>
+        (function () {
+            'use strict';
+            // Self Initialize DOM Factory Components
+            domFactory.handler.autoInit()
+
+
+            // Connect button(s) to drawer(s)
+            var sidebarToggle = document.querySelectorAll('[data-toggle="sidebar"]')
+
+            sidebarToggle.forEach(function (toggle) {
+                toggle.addEventListener('click', function (e) {
+                    var selector = e.currentTarget.getAttribute('data-target') || '#default-drawer'
+                    var drawer = document.querySelector(selector)
+                    if (drawer) {
+                        if (selector == '#default-drawer') {
+                            $('.container-fluid').toggleClass('container--max');
+                        }
+                        drawer.mdkDrawer.toggle();
+                    }
+                })
+            })
+        })()
+    </script>
+
+
+    <script src="/vendor/morris.min.js"></script>
+    <script src="/vendor/raphael.min.js"></script>
+    <script src="/vendor/bootstrap-datepicker.min.js"></script>
+    <script src="/js/datepicker.js"></script>
+    <script src="/vendor/jquery.dataTables.js"></script>
+    <script src="/vendor/dataTables.bootstrap4.js"></script>
+
+
+
+
+    <script>
+        $(function(){
+            $('.modleDailog').modal("hide");
+        });
+        function imgsrc(src){
+            $('#showimg').attr('src','http://localhost:8080/upload/'+src);
+        }
+        function disedit(id,name,location){
+            $('#updateid').attr('value',id);
+            $('#updatename').attr('value',name);
+            $('#updateloc').attr('value',location);
+
+        }
+    </script>
+        <!-- 锚点定位ACTIVE -->
+        <script>
+        var storedhash = window.location.hash;
+        // 不支持则用定时器检测的办法
+        setInterval(function () {
+            // 检测hash值或其中某一段是否更改的函数， 在低版本的iE浏览器中通过window.location.hash取出的指和其它的浏览器不同，要注意
+
+            if (window.location.hash != storedhash) {
+                $(".collapse").find("li").each(function () {
+                    var a = $(this).find("a:first")[0];
+                    if ($(a).attr("href") === document.location.href.split("/")[document.location.href.split("/").length - 1]) {
+                        $(this).addClass("active");
+                    } else {
+                        $(this).removeClass("active");
+                    }
+                });
+                storedhash = window.location.hash;
+            }
+        }, 10);
+    </script>
+
+    <!-- city-picker -->
+    <script src="/city-picker/js/jquery.js"></script>
+    <script src="/city-picker/js/bootstrap.js"></script>
+    <script src="/city-picker/js/city-picker.data.js"></script>
+    <script src="/city-picker/js/city-picker.js"></script>
+    <script src="/city-picker/js/main.js"></script>
+
+    <script type="text/javascript">
+        $("#loading").fadeOut(2000);
+    </script>
+</body>
+
+</html>

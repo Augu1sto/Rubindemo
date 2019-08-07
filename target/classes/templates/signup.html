@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>RUBIN后台管理系统</title>
+
+
+    <!-- Prevent the demo from appearing in search engines -->
+    <meta name="robots" content="noindex">
+
+    <!-- App CSS -->
+    <link type="text/css" href="/css/app.css" rel="stylesheet">
+    <link type="text/css" href="/css/app.rtl.css" rel="stylesheet">
+
+    <!-- Simplebar -->
+    <link type="text/css" href="/vendor/simplebar.css" rel="stylesheet">
+    <link type="text/css" href="/css/mystyle.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="mdk-drawer-layout js-mdk-drawer-layout" data-fullbleed data-push data-has-scrolling-region>
+        <div class="mdk-drawer-layout__content mdk-header-layout__content--scrollable" style="overflow-y: auto;" data-simplebar data-simplebar-force-enabled="true">
+
+
+            <div class="container h-vh d-flex justify-content-center align-items-center flex-column">
+                <div class="d-flex justify-content-center align-items-center mb-3">
+                    <a href="index"><img src="/images/logo1.png"></a>
+                    <!-- <a href="index" class="drawer-brand-circle mr-2">S</a> -->
+                    <h2 class="ml-2 text-bg mb-0"><strong> 后台管理系统</strong></h2>
+                </div>
+                <div class="row w-100 justify-content-center">
+                    <div class="card card-login mb-3">
+                        <div class="card-head">
+                            <ul id="myTab" class="nav nav-tabs" role="tablist">
+                                <li><a href="login" role="tab" data-target="#login">&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;登&nbsp;录&ensp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></li>
+                                <li class="active"><a href="signup" role="tab" data-target="#login">&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;注&nbsp;册&ensp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></li>
+                            </ul>
+                        </div>
+                        <div class="card-body tab-content">
+                         <div class="tab-pane">
+                        <form action="#" method="get"  name="login">
+                           <div class="form-group">
+                                <label>Username</label>
+
+                                <div class="input-group input-group--inline">
+                                        <div class="input-group-addon">
+                                            <i class="material-icons">account_circle</i>
+                                        </div>
+                                        <input type="text" class="form-control" name="username" placeholder="Username">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="d-flex">
+                                        <label>Password</label>
+                                        <!-- <span class="ml-auto"><a href="forgot-password">Forgot password?</a></span> -->
+                                    </div>
+
+                                    <div class="input-group input-group--inline">
+                                        <div class="input-group-addon">
+                                            <i class="material-icons">lock_outline</i>
+                                        </div>
+                                        <input type="password" class="form-control" name="password" placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <a href="index" class="btn btn-success">Login</a>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane active">
+                        <form action="/rub/signup" method="post"  name="signup">
+                           <div class="form-group">
+                                <label>Username</label>
+
+                                <div class="input-group input-group--inline">
+                                        <div class="input-group-addon">
+                                            <i class="material-icons">account_circle</i>
+                                        </div>
+                                        <input type="text" class="form-control" name="admname" placeholder="Username">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="d-flex">
+                                        <label>Password</label>
+                                        <!-- <span class="ml-auto"><a href="forgot-password">Forgot password?</a></span> -->
+                                    </div>
+
+                                    <div class="input-group input-group--inline">
+                                        <div class="input-group-addon">
+                                            <i class="material-icons">lock_outline</i>
+                                        </div>
+                                        <input type="password" class="form-control" name="admpass" placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-success">Signup</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        
+    </div>
+
+    <div th:if="${not #strings.isEmpty(alarm)}" class="alert alert-danger alert-dismissable fade show" role="alert" style="bottom:0;position: fixed;left:40%;display:flex">
+        <div th:text="${alarm}"></div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+
+    </div>
+</body>
+
+<!-- jQuery -->
+<script src="/vendor/jquery.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="/vendor/bootstrap.min.js"></script>
+
+</html>

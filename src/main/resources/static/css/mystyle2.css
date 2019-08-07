@@ -1,0 +1,58 @@
+
+[dir=ltr] .dropdown-item.active, [dir=ltr] .dropdown-item:active {
+    color: #7bb859;
+    text-decoration: none;
+    background-color: transparent;
+  }
+  [dir=ltr] .dropdown-item:hover, [dir=ltr] .dropdown-item:focus {
+    color: #7bb859;
+    text-decoration: none;
+    background-color: #f8f9fa;
+  }
+
+  [dir=ltr] a:hover,[dir=ltr] a:active,[dir=ltr] a:visited {
+    color: #7bb859;
+    text-decoration: underline;
+}
+
+[dir=ltr] a:not([href]):not([tabindex]) {
+  color: black;
+}
+[dir=ltr] a:not([href]):not([tabindex]):hover, [dir=ltr] a:not([href]):not([tabindex]):focus {
+  color: #7bb859;
+  text-decoration: none;
+}
+
+[dir=ltr] a:hover {
+  text-decoration: none;
+}
+[dir=ltr] .fixed-banner .fixed-banner-image-wrapper img {
+  height: 100% !important;
+  width: 100% !important;
+  min-height: 100% !important;
+  min-width: 100% !important;
+}
+
+[dir=ltr] .card-property:hover a {
+  color: #7bb859 !important;
+  text-decoration: none;
+}
+
+[dir=ltr] .loading-dots-fast {
+  color: #7bb859;
+  font-size: 4rem;
+  /* text-indent: 0em; */
+  left: 50%;
+  top: 30%;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: absolute;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+  animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+  z-index: 100;
+
+}
